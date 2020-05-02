@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer } from "react";
+import styled from "@emotion/styled";
 import { getPrediction } from "../helpers";
 import { useCounter } from "../hooks/useCounter";
 import { gameReducer, initialGameState } from "../reducers/gameReducer";
@@ -61,13 +62,43 @@ export function Controls({
   });
 
   return (
-    <div>
-      <Task task={task} time={counter} />
-      <Score score={score} />
-      <Rounds round={round} totalRounds={totalRounds} />
-      <button onClick={clearCanvas}>Clear the canvas.</button>
-      <button onClick={makePrediction}>Predict</button>
-      <button onClick={startGame}>{started ? "Restart" : "Start"}</button>
-    </div>
+    <StyledControls>
+      {started && (
+        <>
+          <Task task={task} time={counter} />
+          <Score score={score} />
+          <Rounds round={round} totalRounds={totalRounds} />
+          <StyledPredictButton onClick={makePrediction}>
+            Predict
+          </StyledPredictButton>
+        </>
+      )}
+      <div>
+        <StyledPredictButton onClick={startGame}>
+          {started ? "Restart" : "Start"}
+        </StyledPredictButton>
+        <StyledClearButton onClick={clearCanvas}>
+          Clear the canvas.
+        </StyledClearButton>
+      </div>
+    </StyledControls>
   );
 }
+
+const StyledClearButton = styled.button`
+  background: ${({ theme }) => theme.colors.secondary};
+  border: 1px solid ${({ theme }) => theme.colors.secondary};
+`;
+
+const StyledPredictButton = styled.button`
+  background: ${({ theme }) => theme.colors.primary};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
+  margin-right: ${({ theme }) => theme.space[2]}px;
+  margin-top: ${({ theme }) => theme.space[2]}px;
+`;
+
+const StyledControls = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 ${({ theme }) => theme.space[2]}px;
+`;
