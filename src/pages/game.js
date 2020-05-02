@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import styled from "@emotion/styled";
 
 import * as tf from "@tensorflow/tfjs";
 import { Canvas } from "../components/Canvas";
@@ -22,20 +23,24 @@ export const Game = () => {
     fetchModels();
   }, []);
 
-  return (
-    <div>
-      {model && (
-        <>
-          <Canvas ref={canvasRef} />
-          <Controls
-            theCanvas={canvasRef}
-            model={model}
-            labels={labelRef.current}
-            setPrediction={setPrediction}
-            prediction={prediction}
-          />
-        </>
-      )}
-    </div>
+  return model ? (
+    <StyledContainer>
+      <Canvas ref={canvasRef} />
+      <Controls
+        theCanvas={canvasRef}
+        model={model}
+        labels={labelRef.current}
+        setPrediction={setPrediction}
+        prediction={prediction}
+      />
+    </StyledContainer>
+  ) : (
+    <div>Loading...</div>
   );
 };
+
+const StyledContainer = styled.main`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
