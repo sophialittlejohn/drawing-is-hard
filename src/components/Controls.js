@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useReducer } from "react";
 import { getPrediction } from "../helpers";
 import { useCounter } from "../hooks/useCounter";
+import { gameReducer, initialGameState } from "../reducers/gameReducer";
 
 export function Controls({
   theCanvas,
@@ -10,42 +11,14 @@ export function Controls({
   prediction,
 }) {
   const { startCounter, counter, stopCounter } = useCounter(20);
-
-  const [started, setStarted] = useState(false);
-  const [task, setTask] = useState(null);
-  const [round, setRound] = useState(null);
-  const [score, setScore] = useState(null);
-
-  const startNewRound = () => {
-    const currentRound = round;
-    setTask(labels[currentRound + 1]);
-    setRound(currentRound + 1);
-    clearCanvas();
-    startCounter();
-  };
-
-  const winRound = () => {
-    setPrediction("");
-    setScore(score + 1);
-    startNewRound();
-  };
-
-  const outOfTime = () => {
-    startNewRound();
-  };
-
-  const gameOver = () => {
-    setStarted(false);
-    stopCounter();
-    setTask(null);
-  };
+  const [{ round, task, started, score }, dispatch] = useReducer(
+    gameReducer,
+    initialGameState
+  );
 
   const startGame = () => {
-    setRound(1);
-    setScore(0);
     startCounter();
-    setStarted(true);
-    setTask(labels[0]);
+    dispatch({ type: "START_GAME", payload: labels[0] });
   };
 
   const clearCanvas = () => {
@@ -55,17 +28,20 @@ export function Controls({
   };
 
   useEffect(() => {
-    if (started && prediction === task) {
-      winRound();
-    }
-  });
-
-  useEffect(() => {
     if (started) {
       if (round === 3) {
-        gameOver();
+        stopCounter();
+        dispatch({ type: "GAME_OVER" });
+      } else if (started && prediction === task) {
+        setPrediction("");
+        clearCanvas();
+        startCounter();
+        dispatch({ type: "WIN_ROUND", payload: labels[round + 1] });
       } else if (counter === 0) {
-        outOfTime();
+        clearCanvas();
+        startCounter();
+        setPrediction("");
+        dispatch({ type: "NEW_ROUND", payload: labels[round + 1] });
       }
     }
   });
