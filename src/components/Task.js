@@ -2,9 +2,10 @@ import React from "react";
 
 export const Task = ({ task, time }) => {
   return (
-    <div>
+    <p>
       Please draw a: {task}
+      <br />
       You have {time} left...
-    </div>
+    </p>
   );
 };
