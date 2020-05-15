@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import styled from "@emotion/styled";
-
 import * as tf from "@tensorflow/tfjs";
+
 import { Canvas } from "../components/Canvas";
 import { Controls } from "../components/Controls";
+import { Container, Header, Card, Placeholder } from "semantic-ui-react";
 
 export const Game = () => {
   const canvasRef = useRef(null);
@@ -23,34 +23,34 @@ export const Game = () => {
     fetchModels();
   }, []);
 
-  return model ? (
-    <StyledContainer>
-      <h1>Drawing is hard</h1>
-      <p>You've got to be fast!</p>
-      <StyledGame>
-        <Canvas ref={canvasRef} />
-        <Controls
-          theCanvas={canvasRef}
-          model={model}
-          labels={labelRef.current}
-        />
-      </StyledGame>
-    </StyledContainer>
-  ) : (
-    <div>Loading...</div>
+  return (
+    <Container style={{ paddingTop: "10%" }}>
+      <Card.Group>
+        {model ? (
+          <Card raised style={{ padding: "24px" }}>
+            <Header as="h1">Drawing is hard</Header>
+            <p>You've got to be fast!</p>
+            <Controls
+              theCanvas={canvasRef}
+              model={model}
+              labels={labelRef.current}
+            />
+          </Card>
+        ) : (
+          <Placeholder>
+            <Placeholder.Image square />
+          </Placeholder>
+        )}
+        <Card raised>
+          {model ? (
+            <Canvas ref={canvasRef} />
+          ) : (
+            <Placeholder>
+              <Placeholder.Image square />
+            </Placeholder>
+          )}
+        </Card>
+      </Card.Group>
+    </Container>
   );
 };
-
-const StyledContainer = styled.main`
-  background: ${({ theme }) => theme.colors.background};
-  max-width: 800px;
-  height: 100%;
-  margin: 100px auto;
-  padding: ${({ theme }) => theme.space[4]}px;
-`;
-
-const StyledGame = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-`;
