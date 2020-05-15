@@ -1,34 +1,18 @@
 import React, { useEffect, useReducer } from "react";
-import styled from "@emotion/styled";
-import { getPrediction } from "../helpers";
+import { getPrediction, clearCanvas } from "../helpers";
 import { useCounter } from "../hooks/useCounter";
 import { gameReducer, initialGameState } from "../reducers/gameReducer";
 import { Rounds } from "./Rounds";
 import { Score } from "./Score";
 import { Task } from "./Task";
+import { Button } from "semantic-ui-react";
 
-export function Controls({ theCanvas, model, labels, totalRounds = 5 }) {
+export function Controls({ theCanvas, model, labels, totalRounds = 3 }) {
   const { startCounter, counter, stopCounter } = useCounter(20);
   const [{ round, task, started, score }, dispatch] = useReducer(
     gameReducer,
     initialGameState
   );
-
-  const clearCanvas = () => {
-    const canvas = theCanvas.current;
-    const ctx = canvas.getContext("2d");
-    ctx.fillRect(0, 0, canvas.height, canvas.width);
-  };
-
-  const makePrediction = () => {
-    getPrediction(theCanvas, model).then((prediction) => {
-      if (labels[prediction[0]] === task) {
-        clearCanvas();
-        startCounter();
-        dispatch({ type: "WIN_ROUND", payload: labels[round + 1] });
-      }
-    });
-  };
 
   const startGame = () => {
     startCounter();
@@ -43,7 +27,7 @@ export function Controls({ theCanvas, model, labels, totalRounds = 5 }) {
       stopCounter();
       dispatch({ type: "GAME_OVER" });
     } else if (counter === 0) {
-      clearCanvas();
+      clearCanvas(theCanvas);
       startCounter();
       dispatch({ type: "NEW_ROUND", payload: labels[round + 1] });
     }
@@ -55,54 +39,36 @@ export function Controls({ theCanvas, model, labels, totalRounds = 5 }) {
     }
   });
 
+  useEffect(() => {
+    getPrediction(theCanvas, model).then((prediction) => {
+      if (labels[prediction[0]] === task) {
+        clearCanvas(theCanvas);
+        startCounter();
+        dispatch({ type: "WIN_ROUND", payload: labels[round + 1] });
+      }
+    });
+  });
+
   return (
-    <StyledControls>
-      {started && (
-        <>
-          <Task task={task} time={counter} />
-          <Score score={score} />
-          <Rounds round={round} totalRounds={totalRounds} />
-          <StyledButtonContainer>
-            <StyledPredictButton onClick={makePrediction}>
-              Predict
-            </StyledPredictButton>
-            <StyledClearButton onClick={clearCanvas}>
-              Clear the canvas
-            </StyledClearButton>
-          </StyledButtonContainer>
-        </>
-      )}
+    <div>
+      {started && <Task task={task} time={counter} />}
+      <Score score={score} />
+      <Rounds round={round} totalRounds={totalRounds} />
       <div>
-        <StyledPredictButton onClick={startGame} started={started}>
-          {started ? "Restart" : "Start"}
-        </StyledPredictButton>
+        <Button.Group vertical labeled icon>
+          <Button icon="play" content="Play" onClick={startGame} />
+          <Button
+            icon="close"
+            content="Clear"
+            onClick={() => clearCanvas(theCanvas)}
+          />
+          <Button
+            icon="stop"
+            content="Stop"
+            onClick={() => dispatch({ type: "GAME_OVER" })}
+          />
+        </Button.Group>
       </div>
-    </StyledControls>
+    </div>
   );
 }
-
-const StyledClearButton = styled.button`
-  background: ${({ theme }) => theme.colors.background};
-  border: ${({ theme }) => theme.colors.primary};
-`;
-
-const StyledPredictButton = styled.button`
-  background: ${({ theme, started }) =>
-    started ? theme.colors.background : theme.colors.primary};
-  border: ${({ theme, started }) => (started ? theme.colors.primary : "none")};
-  border: 1px solid ${({ theme }) => theme.colors.primary};
-  margin-right: ${({ theme }) => theme.space[2]}px;
-  margin-top: ${({ theme }) => theme.space[2]}px;
-  color: ${({ theme, started }) =>
-    started ? theme.colors.primary : theme.colors.background};
-`;
-
-const StyledControls = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 ${({ theme }) => theme.space[2]}px;
-`;
-
-const StyledButtonContainer = styled.div`
-  display: flex;
-`;
