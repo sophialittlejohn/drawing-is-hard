@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import styled from "@emotion/styled";
 
 export const Canvas = React.forwardRef((props, ref) => {
   let mouseDown = false;
@@ -45,7 +46,7 @@ export const Canvas = React.forwardRef((props, ref) => {
   });
 
   return (
-    <canvas
+    <StyledCanvas
       height={300}
       width={300}
       ref={ref}
@@ -55,3 +56,8 @@ export const Canvas = React.forwardRef((props, ref) => {
     />
   );
 });
+
+const StyledCanvas = styled.canvas`
+  border: 1px solid black;
+  border-radius: 8px;
+`;

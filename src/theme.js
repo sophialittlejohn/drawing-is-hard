@@ -18,11 +18,11 @@ export const theme = {
     heading: 1.25,
   },
   colors: {
-    text: "#545f66ff",
-    background: "#ffead0ff",
-    primary: "#96bdc6ff",
-    secondary: "#81968fff",
-    tertiary: "#cfb9a5ff",
+    text: "#0C0E0D",
+    background: "#FBFAFB",
+    primary: "#4D1C21",
+    secondary: "#B9462C",
+    tertiary: "#E8A25F",
   },
   shadows: {
     box: "0px 5px 12px rgba(0, 0, 0, 0.05), 0px 4px 12px rgba(0, 0, 0, 0.1)",
@@ -36,7 +36,7 @@ export const globalStyles = css`
     font-weight: ${theme.fontWeights.body};
   }
   body {
-    background: ${theme.colors.text};
+    background: ${theme.colors.tertiary};
     color: ${theme.colors.text};
     font-size: ${theme.fontSizes[3]}px;
   }
@@ -47,6 +47,7 @@ export const globalStyles = css`
     font-weight: ${theme.fontWeights.heading};
     font-size: ${theme.fontSizes[5]}px;
   }
+
   h2 {
     color: ${theme.colors.text};
     font-family: ${theme.fonts.heading};
@@ -82,10 +83,10 @@ export const globalStyles = css`
   }
 
   button {
-    padding: ${theme.space[2]}px;
-    border-radius: 4px;
+    padding: ${theme.space[2]}px ${theme.space[4]}px;
+    border-radius: 8px;
     border: none;
-    font-size: ${theme.fontSizes[2]}px;
+    font-size: ${theme.fontSizes[3]}px;
     box-shadow: ${theme.shadows.box};
   }
 `;

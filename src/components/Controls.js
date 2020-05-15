@@ -39,7 +39,7 @@ export function Controls({
   };
 
   const playGame = () => {
-    if (round === totalRounds) {
+    if (round === totalRounds + 1) {
       stopCounter();
       dispatch({ type: "GAME_OVER" });
     } else if (prediction === task) {
@@ -68,37 +68,47 @@ export function Controls({
           <Task task={task} time={counter} />
           <Score score={score} />
           <Rounds round={round} totalRounds={totalRounds} />
-          <StyledPredictButton onClick={makePrediction}>
-            Predict
-          </StyledPredictButton>
+          <StyledButtonContainer>
+            <StyledPredictButton onClick={makePrediction}>
+              Predict
+            </StyledPredictButton>
+            <StyledClearButton onClick={clearCanvas}>
+              Clear the canvas
+            </StyledClearButton>
+          </StyledButtonContainer>
         </>
       )}
       <div>
-        <StyledPredictButton onClick={startGame}>
+        <StyledPredictButton onClick={startGame} started={started}>
           {started ? "Restart" : "Start"}
         </StyledPredictButton>
-        <StyledClearButton onClick={clearCanvas}>
-          Clear the canvas.
-        </StyledClearButton>
       </div>
     </StyledControls>
   );
 }
 
 const StyledClearButton = styled.button`
-  background: ${({ theme }) => theme.colors.secondary};
-  border: 1px solid ${({ theme }) => theme.colors.secondary};
+  background: ${({ theme }) => theme.colors.background};
+  border: ${({ theme }) => theme.colors.primary};
 `;
 
 const StyledPredictButton = styled.button`
-  background: ${({ theme }) => theme.colors.primary};
+  background: ${({ theme, started }) =>
+    started ? theme.colors.background : theme.colors.primary};
+  border: ${({ theme, started }) => (started ? theme.colors.primary : "none")};
   border: 1px solid ${({ theme }) => theme.colors.primary};
   margin-right: ${({ theme }) => theme.space[2]}px;
   margin-top: ${({ theme }) => theme.space[2]}px;
+  color: ${({ theme, started }) =>
+    started ? theme.colors.primary : theme.colors.background};
 `;
 
 const StyledControls = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 ${({ theme }) => theme.space[2]}px;
+`;
+
+const StyledButtonContainer = styled.div`
+  display: flex;
 `;
