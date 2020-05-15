@@ -20,6 +20,8 @@ export const gameReducer = (state, action) => {
       };
     case "GAME_OVER":
       return { ...state, started: false, task: null };
+    case "WIN_GAME":
+      return { ...state, started: false };
     default:
       throw new Error();
   }

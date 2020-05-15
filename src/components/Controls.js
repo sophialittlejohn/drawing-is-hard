@@ -7,14 +7,7 @@ import { Rounds } from "./Rounds";
 import { Score } from "./Score";
 import { Task } from "./Task";
 
-export function Controls({
-  theCanvas,
-  model,
-  labels,
-  setPrediction,
-  prediction,
-  totalRounds = 5,
-}) {
+export function Controls({ theCanvas, model, labels, totalRounds = 5 }) {
   const { startCounter, counter, stopCounter } = useCounter(20);
   const [{ round, task, started, score }, dispatch] = useReducer(
     gameReducer,
@@ -28,9 +21,13 @@ export function Controls({
   };
 
   const makePrediction = () => {
-    getPrediction(theCanvas, model).then((prediction) =>
-      setPrediction(labels[prediction[0]])
-    );
+    getPrediction(theCanvas, model).then((prediction) => {
+      if (labels[prediction[0]] === task) {
+        clearCanvas();
+        startCounter();
+        dispatch({ type: "WIN_ROUND", payload: labels[round + 1] });
+      }
+    });
   };
 
   const startGame = () => {
@@ -39,18 +36,15 @@ export function Controls({
   };
 
   const playGame = () => {
-    if (round === totalRounds + 1) {
+    if (score === 5) {
+      stopCounter();
+      dispatch({ type: "WIN_GAME" });
+    } else if (round === totalRounds + 1) {
       stopCounter();
       dispatch({ type: "GAME_OVER" });
-    } else if (prediction === task) {
-      setPrediction("");
-      clearCanvas();
-      startCounter();
-      dispatch({ type: "WIN_ROUND", payload: labels[round + 1] });
     } else if (counter === 0) {
       clearCanvas();
       startCounter();
-      setPrediction("");
       dispatch({ type: "NEW_ROUND", payload: labels[round + 1] });
     }
   };

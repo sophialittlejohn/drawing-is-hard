@@ -9,7 +9,7 @@ export const Game = () => {
   const canvasRef = useRef(null);
   const labelRef = useRef(null);
 
-  const [prediction, setPrediction] = useState("");
+  // add typed.js
   const [model, setModel] = useState(false);
 
   const fetchModels = async () => {
@@ -33,8 +33,6 @@ export const Game = () => {
           theCanvas={canvasRef}
           model={model}
           labels={labelRef.current}
-          setPrediction={setPrediction}
-          prediction={prediction}
         />
       </StyledGame>
     </StyledContainer>
