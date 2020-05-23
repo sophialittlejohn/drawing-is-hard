@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from "react";
+import React, { useContext } from "react";
 import { Container, Header, Card, Button } from "semantic-ui-react";
 import { useControls } from "../hooks/useControls";
 import { Score } from "../components/Score";
@@ -20,8 +20,7 @@ export const useGameContext = () => {
 };
 
 export const Game = () => {
-  const canvasRef = useRef(null);
-  const { state, controls } = useControls(canvasRef);
+  const { state, controls } = useControls();
 
   const memoizedStateValue = useMemo(() => state, [state]);
 
@@ -52,11 +51,18 @@ export const Game = () => {
                   content="Stop"
                   onClick={controls.stopGame}
                 />
+                <Button
+                  icon="search"
+                  content="Guess"
+                  onClick={controls.guess}
+                />
               </Button.Group>
             </div>
           </Card>
 
-          <Card raised>{<Canvas ref={canvasRef} />}</Card>
+          <Card raised>
+            <Canvas />
+          </Card>
         </Card.Group>
       </Container>
     </GameStateContext.Provider>

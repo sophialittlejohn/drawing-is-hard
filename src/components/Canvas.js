@@ -1,6 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
-export const Canvas = React.forwardRef((props, ref) => {
+export const Canvas = React.memo((props) => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {});
+
   let mouseDown = false;
   let lastX;
   let lastY;
@@ -37,7 +41,7 @@ export const Canvas = React.forwardRef((props, ref) => {
   };
 
   useEffect(() => {
-    const canvas = ref.current;
+    const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
     context.fillStyle = "#ffffff";
@@ -48,10 +52,11 @@ export const Canvas = React.forwardRef((props, ref) => {
     <canvas
       height={300}
       width={300}
-      ref={ref}
+      ref={canvasRef}
       onMouseDown={() => (mouseDown = true)}
       onMouseUp={handleMouseup}
       onMouseMove={(e) => handleMousemove(e)}
+      id="myCanvas"
     />
   );
 });
