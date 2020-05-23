@@ -19,9 +19,3 @@ export function getPrediction(theCanvas, model) {
     .data()
     .then(async (prediction) => await tf.argMax(prediction).data()); // returns an int32 containing the predicted class
 }
-
-export const clearCanvas = (theCanvas) => {
-  const canvas = theCanvas.current;
-  const ctx = canvas.getContext("2d");
-  ctx.fillRect(0, 0, canvas.height, canvas.width);
-};
