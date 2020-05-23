@@ -1,56 +1,64 @@
-import React, { useState, useEffect, useRef } from "react";
-import * as tf from "@tensorflow/tfjs";
-
+import React, { useRef, useContext } from "react";
+import { Container, Header, Card, Button } from "semantic-ui-react";
+import { useControls } from "../hooks/useControls";
+import { Score } from "../components/Score";
+import { Rounds } from "../components/Rounds";
+import { Task } from "../components/Task";
 import { Canvas } from "../components/Canvas";
-import { Controls } from "../components/Controls";
-import { Container, Header, Card, Placeholder } from "semantic-ui-react";
+import { useMemo } from "react";
+
+export const TOTAL_ROUNDS = 5;
+
+const GameStateContext = React.createContext();
+
+export const useGameContext = () => {
+  const context = useContext(GameStateContext);
+  if (!context) {
+    throw new Error("This component must be used within a <Game /> component.");
+  }
+  return context;
+};
 
 export const Game = () => {
   const canvasRef = useRef(null);
-  const labelRef = useRef(null);
+  const { state, controls } = useControls(canvasRef);
 
-  // add typed.js
-  const [model, setModel] = useState(false);
-
-  const fetchModels = async () => {
-    const model = await tf.loadLayersModel("../../model/model.json");
-    const label = require("./../labels.json");
-    labelRef.current = label;
-    setModel(model);
-  };
-
-  useEffect(() => {
-    fetchModels();
-  }, []);
+  const memoizedStateValue = useMemo(() => state, [state]);
 
   return (
-    <Container style={{ paddingTop: "10%" }}>
-      <Card.Group>
-        {model ? (
+    <GameStateContext.Provider value={{ ...memoizedStateValue }}>
+      <Container style={{ paddingTop: "10%" }}>
+        <Card.Group>
           <Card raised style={{ padding: "24px" }}>
             <Header as="h1">Drawing is hard</Header>
             <p>You've got to be fast!</p>
-            <Controls
-              theCanvas={canvasRef}
-              model={model}
-              labels={labelRef.current}
-            />
+            <div>
+              {state.started && <Task />}
+              <Score />
+              <Rounds />
+              <Button.Group vertical labeled icon>
+                <Button
+                  icon="play"
+                  content="Play"
+                  onClick={controls.startGame}
+                />
+                <Button
+                  icon="close"
+                  content="Clear"
+                  onClick={controls.clearCanvas}
+                />
+                <Button
+                  icon="stop"
+                  content="Stop"
+                  onClick={controls.stopGame}
+                />
+              </Button.Group>
+            </div>
           </Card>
-        ) : (
-          <Placeholder>
-            <Placeholder.Image square />
-          </Placeholder>
-        )}
-        <Card raised>
-          {model ? (
-            <Canvas ref={canvasRef} />
-          ) : (
-            <Placeholder>
-              <Placeholder.Image square />
-            </Placeholder>
-          )}
-        </Card>
-      </Card.Group>
-    </Container>
+
+          <Card raised>{<Canvas ref={canvasRef} />}</Card>
+        </Card.Group>
+      </Container>
+    </GameStateContext.Provider>
   );
 };

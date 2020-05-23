@@ -1,11 +1,13 @@
 import React from "react";
+import { useGameContext } from "../pages/game";
 
-export const Task = ({ task, time }) => {
+export const Task = () => {
+  const { counter, task } = useGameContext();
   return (
     <p>
       Please draw a: {task}
       <br />
-      You have {time} left...
+      You have {counter} left...
     </p>
   );
 };
