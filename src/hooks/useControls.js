@@ -11,7 +11,7 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
   const canvasRef = useRef(null);
 
   const { startCounter, counter, stopCounter } = useCounter();
-  const [{ round, task, started, score }, dispatch] = useReducer(
+  const [{ round, task, inProgress, score }, dispatch] = useReducer(
     gameReducer,
     initialGameState
   );
@@ -73,13 +73,13 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
   }, []);
 
   useEffect(() => {
-    if (started) {
+    if (inProgress) {
       playGame();
     }
   });
 
   useEffect(() => {
-    if (started) {
+    if (inProgress) {
       guess();
     }
   });
@@ -93,7 +93,7 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
       startCounter,
     },
     state: {
-      started,
+      inProgress,
       task,
       counter,
       round,

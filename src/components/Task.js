@@ -17,7 +17,7 @@ export const Task = ({ startCounter }) => {
   const [partTwo, setPartTwo] = useState(false);
   const [partThree, setPartThree] = useState(false);
 
-  const { counter, task, score, started, round } = useGameContext();
+  const { counter, task, score, inProgress, round } = useGameContext();
   const previousTask = usePrevious(task);
   const previousScore = usePrevious(score);
 
@@ -39,11 +39,11 @@ export const Task = ({ startCounter }) => {
     if (previousScore !== score) {
       unmountTypewriter();
     }
-    if (started && task && previousTask !== task && round < 3) {
+    if (inProgress && task && previousTask !== task && round < 3) {
       // re-mount typed
       window.setTimeout(() => setPartOne(true), 1000);
     }
-  }, [counter, started, previousTask, task, score, previousScore, round]);
+  }, [counter, inProgress, previousTask, task, score, previousScore, round]);
 
   return (
     <>
@@ -57,7 +57,6 @@ export const Task = ({ startCounter }) => {
                 .typeString("Hello, you have ")
                 .callFunction(() => {
                   setPartTwo(true);
-                  console.log("PartOne typed out!");
                 })
                 .start();
             }}
@@ -73,7 +72,6 @@ export const Task = ({ startCounter }) => {
                   .typeString("to show off your best drawing of a ")
                   .callFunction(() => {
                     setPartThree(true);
-                    console.log("PartTwo typed out!");
                   })
                   .start();
               }}
@@ -90,7 +88,6 @@ export const Task = ({ startCounter }) => {
                   .typeString("in the box to the right.")
                   .callFunction(() => {
                     setPartThree(true);
-                    console.log("PartThree typed out!");
                     startCounter();
                   })
                   .start();
