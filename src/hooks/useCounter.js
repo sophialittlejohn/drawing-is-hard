@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
-export const useCounter = (value = 20) => {
-  const [counter, setCounter] = useState(0);
+export const useCounter = () => {
+  const [counter, setCounter] = useState(null);
 
-  const startCounter = () => {
-    setCounter(value);
+  const startCounter = (value) => {
+    setCounter(value || 20);
   };
 
   const stopCounter = () => {
-    setCounter(0);
+    setCounter(null);
   };
 
   useEffect(() => {
@@ -17,5 +17,9 @@ export const useCounter = (value = 20) => {
     return () => clearInterval(timer);
   });
 
-  return { counter, startCounter, stopCounter };
+  return {
+    counter,
+    startCounter,
+    stopCounter,
+  };
 };

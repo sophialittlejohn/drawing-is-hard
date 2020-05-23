@@ -10,6 +10,12 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
   const modelRef = useRef(null);
   const canvasRef = useRef(null);
 
+  const { startCounter, counter, stopCounter } = useCounter();
+  const [{ round, task, started, score }, dispatch] = useReducer(
+    gameReducer,
+    initialGameState
+  );
+
   const fetchModels = async () => {
     const model = await tf.loadLayersModel("../../model/model.json");
     const label = require("./../labels.json");
@@ -17,16 +23,10 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
     labelRef.current = label;
     modelRef.current = model;
     canvasRef.current = document.getElementById("myCanvas");
+    startGame();
   };
 
-  const { startCounter, counter, stopCounter } = useCounter(20);
-  const [{ round, task, started, score }, dispatch] = useReducer(
-    gameReducer,
-    initialGameState
-  );
-
   const startGame = () => {
-    startCounter();
     dispatch({ type: "START_GAME", payload: labelRef.current[0] });
   };
 
@@ -36,7 +36,6 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
   };
 
   const playGame = () => {
-    console.log("playing");
     if (score === totalRounds) {
       stopCounter();
       dispatch({ type: "WIN_GAME" });
@@ -45,7 +44,7 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
       dispatch({ type: "GAME_OVER" });
     } else if (counter === 0) {
       clearCanvas(canvasRef);
-      startCounter();
+      stopCounter();
       dispatch({ type: "NEW_ROUND", payload: labelRef.current[round + 1] });
     } else {
       return;
@@ -59,13 +58,11 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
   };
 
   const guess = async () => {
-    console.log("guessing", canvasRef);
     if (modelRef && modelRef.current && canvasRef && canvasRef.current) {
       const prediction = await getPrediction(canvasRef, modelRef.current);
-      console.log(">", labelRef.current[prediction[0]]);
       if (prediction && labelRef.current[prediction[0]] === task) {
         clearCanvas(canvasRef);
-        startCounter();
+        stopCounter();
         dispatch({ type: "WIN_ROUND", payload: labelRef.current[round + 1] });
       }
     }
@@ -76,14 +73,12 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
   }, []);
 
   useEffect(() => {
-    console.log("usingEffect");
     if (started) {
       playGame();
     }
   });
 
   useEffect(() => {
-    console.log("usingGuess");
     if (started) {
       guess();
     }
@@ -95,6 +90,7 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
       stopGame,
       clearCanvas,
       guess,
+      startCounter,
     },
     state: {
       started,

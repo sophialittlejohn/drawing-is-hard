@@ -6,8 +6,9 @@ import { Rounds } from "../components/Rounds";
 import { Task } from "../components/Task";
 import { Canvas } from "../components/Canvas";
 import { useMemo } from "react";
+import { useEffect } from "react";
 
-export const TOTAL_ROUNDS = 5;
+export const TOTAL_ROUNDS = 2;
 
 const GameStateContext = React.createContext();
 
@@ -32,15 +33,10 @@ export const Game = () => {
             <Header as="h1">Drawing is hard</Header>
             <p>You've got to be fast!</p>
             <div>
-              {state.started && <Task />}
+              <Task startCounter={controls.startCounter} />
               <Score />
               <Rounds />
               <Button.Group vertical labeled icon>
-                <Button
-                  icon="play"
-                  content="Play"
-                  onClick={controls.startGame}
-                />
                 <Button
                   icon="close"
                   content="Clear"
@@ -50,11 +46,6 @@ export const Game = () => {
                   icon="stop"
                   content="Stop"
                   onClick={controls.stopGame}
-                />
-                <Button
-                  icon="search"
-                  content="Guess"
-                  onClick={controls.guess}
                 />
               </Button.Group>
             </div>
