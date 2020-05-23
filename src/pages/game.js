@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Header, Card, Button } from "semantic-ui-react";
+import { useHistory } from "react-router-dom";
+
 import { useControls } from "../hooks/useControls";
 import { Score } from "../components/Score";
 import { Rounds } from "../components/Rounds";
 import { Task } from "../components/Task";
 import { Canvas } from "../components/Canvas";
 import { useMemo } from "react";
-import { useEffect } from "react";
 
 export const TOTAL_ROUNDS = 2;
 
@@ -21,7 +22,14 @@ export const useGameContext = () => {
 };
 
 export const Game = () => {
+  const { push } = useHistory();
   const { state, controls } = useControls();
+
+  useEffect(() => {
+    if (state.inProgress === false) {
+      push("game-over");
+    }
+  });
 
   const memoizedStateValue = useMemo(() => state, [state]);
 
