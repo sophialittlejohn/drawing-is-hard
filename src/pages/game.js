@@ -22,47 +22,54 @@ export const useGameContext = () => {
 };
 
 export const Game = () => {
-  const { push } = useHistory();
+  const { replace } = useHistory();
   const { state, controls } = useControls();
 
-  useEffect(() => {
-    if (state.inProgress === false) {
-      push("game-over");
-    }
-  });
+  // useEffect(() => {
+  //   if (state.inProgress === false) {
+  //     replace("game-over", { score: state.score });
+  //   }
+  // });
 
   const memoizedStateValue = useMemo(() => state, [state]);
 
   return (
     <GameStateContext.Provider value={{ ...memoizedStateValue }}>
-      <Container style={{ paddingTop: "10%" }}>
-        <Card.Group>
-          <Card raised style={{ padding: "24px" }}>
-            <Header as="h1">Drawing is hard</Header>
-            <p>You've got to be fast!</p>
+      <Container
+        style={{
+          paddingTop: "10%",
+          display: "flex",
+        }}
+      >
+        <div
+          style={{
+            width: "300px",
+            height: "300px",
+            display: "flex",
+            justifyContent: "space-bewteen",
+            flexDirection: "column",
+          }}
+        >
+          <Header as="p">
             <div>
               <Task startCounter={controls.startCounter} />
-              <Score />
-              <Rounds />
-              <Button.Group vertical labeled icon>
-                <Button
-                  icon="close"
-                  content="Clear"
-                  onClick={controls.clearCanvas}
-                />
-                <Button
-                  icon="stop"
-                  content="Stop"
-                  onClick={controls.stopGame}
-                />
-              </Button.Group>
             </div>
-          </Card>
+            <Score />
+            <Rounds />
+            <Button.Group vertical labeled icon>
+              <Button
+                icon="close"
+                content="Clear"
+                onClick={controls.clearCanvas}
+              />
+              <Button icon="stop" content="Stop" onClick={controls.stopGame} />
+            </Button.Group>
+          </Header>
+        </div>
 
-          <Card raised>
-            <Canvas />
-          </Card>
-        </Card.Group>
+        <Card raised>
+          <Canvas />
+        </Card>
       </Container>
     </GameStateContext.Provider>
   );
