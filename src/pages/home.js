@@ -27,16 +27,16 @@ export const Home = () => {
                   game and uses a sampling from the Quick, Draw! dataset.
                 </p>
                 <p>
-                  Brought to you by{" "}
+                  It was developed in the context of my capstone project at{" "}
                   <a href="https://www.extensionschool.ch/">
-                    EPFL Extension School{" "}
+                    EPFL Extension School
                   </a>
-                  as part of my capstone project for the UI Development course.
+                  .
                 </p>
                 <p>
-                  Check out the source code on my{" "}
+                  Check out the source code in my{" "}
                   <a href="https://github.com/sophialittlejohn/drawing-is-hard">
-                    GitHub profile
+                    GitHub repo
                   </a>
                   .
                 </p>
