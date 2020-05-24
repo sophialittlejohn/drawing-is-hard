@@ -6,7 +6,7 @@ export const Rounds = () => {
   const round = useGameContext();
   return (
     <div>
-      Round: {round.round} of {TOTAL_ROUNDS}
+      Round {round.round} of {TOTAL_ROUNDS}
     </div>
   );
 };

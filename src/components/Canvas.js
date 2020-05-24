@@ -57,6 +57,10 @@ export const Canvas = React.memo((props) => {
       onMouseUp={handleMouseup}
       onMouseMove={(e) => handleMousemove(e)}
       id="myCanvas"
+      style={{
+        border: "3px dotted gray",
+        cursor: "pointer",
+      }}
     />
   );
 });

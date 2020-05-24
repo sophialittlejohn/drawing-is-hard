@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, Header, Card, Button } from "semantic-ui-react";
+import { Container, Header, Card, Button, Grid, Icon } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
 import { useControls } from "../hooks/useControls";
@@ -27,41 +27,63 @@ export const Game = () => {
 
   return (
     <GameStateContext.Provider value={{ ...memoizedStateValue }}>
-      <Container
-        style={{
-          paddingTop: "10%",
-          display: "flex",
-        }}
-      >
-        <div
-          style={{
-            width: "300px",
-            height: "300px",
-            display: "flex",
-            justifyContent: "space-bewteen",
-            flexDirection: "column",
-          }}
-        >
-          <Header as="p">
-            <div>
-              <Task startCounter={controls.startCounter} />
-            </div>
-            <Score />
-            <Rounds />
-            <Button.Group vertical labeled icon>
+      <Container style={{ paddingTop: "10%" }} text>
+        <Grid columns="equal">
+          <Grid.Row>
+            <Grid.Column>
+              <Card fluid color="olive">
+                <Card.Content>
+                  <Header as="h2">
+                    {" "}
+                    <Rounds />
+                  </Header>
+                </Card.Content>
+              </Card>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row stretched>
+            <Grid.Column>
+              <Card fluid raised>
+                <Card.Content style={{ fontSize: "20px" }}>
+                  <Grid columns="equal">
+                    <Grid.Row>
+                      <Grid.Column>
+                        <Canvas />
+                      </Grid.Column>
+                      <Grid.Column>
+                        <Task startCounter={controls.startCounter} />
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
+                </Card.Content>
+              </Card>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width="14">
               <Button
-                icon="close"
-                content="Clear"
                 onClick={controls.clearCanvas}
-              />
-              <Button icon="stop" content="Stop" onClick={controls.stopGame} />
-            </Button.Group>
-          </Header>
-        </div>
-
-        <Card raised>
-          <Canvas />
-        </Card>
+                size="massive"
+                color="olive"
+                fluid
+              >
+                Clear Canvas
+              </Button>
+            </Grid.Column>
+            <Grid.Column width="two">
+              <Button
+                onClick={() => replace("/")}
+                size="massive"
+                fluid
+                icon
+                basic
+                color="olive"
+              >
+                <Icon name="home" />
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </Container>
     </GameStateContext.Provider>
   );
