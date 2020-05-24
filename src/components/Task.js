@@ -1,16 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import Typewriter from "typewriter-effect";
 
-import { useGameContext } from "../pages/game";
 import { useState } from "react";
-
-function usePrevious(value) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-}
+import { usePrevious } from "../hooks/usePrevious";
+import { useGameContext } from "../hooks/useGameContext";
 
 export const Task = ({ startCounter }) => {
   const [partOne, setPartOne] = useState(false);
@@ -33,7 +26,6 @@ export const Task = ({ startCounter }) => {
 
   useEffect(() => {
     if (counter === 0) {
-      // unmount typed components
       unmountTypewriter();
     }
     if (previousScore !== score) {
@@ -52,6 +44,7 @@ export const Task = ({ startCounter }) => {
           <Typewriter
             // target child div to for inline layout
             key={partOne}
+            options={{ delay: 10 }}
             onInit={(typewriter) => {
               typewriter
                 .typeString("Hello, you have ")
@@ -67,9 +60,10 @@ export const Task = ({ startCounter }) => {
             {counter || 20}
             <Typewriter
               key={partTwo}
+              options={{ delay: 10 }}
               onInit={(typewriter) => {
                 typewriter
-                  .typeString("to show off your best drawing of a ")
+                  .typeString("seconds to draw a ")
                   .callFunction(() => {
                     setPartThree(true);
                   })
@@ -83,9 +77,10 @@ export const Task = ({ startCounter }) => {
             {task}
             <Typewriter
               key={partThree}
+              options={{ delay: 10 }}
               onInit={(typewriter) => {
                 typewriter
-                  .typeString("in the box to the right.")
+                  .typeString("in in the box to the right.")
                   .callFunction(() => {
                     setPartThree(true);
                     startCounter();

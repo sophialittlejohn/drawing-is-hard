@@ -1,5 +1,6 @@
 import React from "react";
-import { useGameContext, TOTAL_ROUNDS } from "../pages/game";
+import { TOTAL_ROUNDS } from "../pages/game";
+import { useGameContext } from "../hooks/useGameContext";
 
 export const Rounds = () => {
   const round = useGameContext();

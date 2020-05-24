@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Container, Header, Card, Button } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
@@ -8,28 +8,19 @@ import { Rounds } from "../components/Rounds";
 import { Task } from "../components/Task";
 import { Canvas } from "../components/Canvas";
 import { useMemo } from "react";
+import { GameStateContext } from "../hooks/useGameContext";
 
 export const TOTAL_ROUNDS = 2;
-
-const GameStateContext = React.createContext();
-
-export const useGameContext = () => {
-  const context = useContext(GameStateContext);
-  if (!context) {
-    throw new Error("This component must be used within a <Game /> component.");
-  }
-  return context;
-};
 
 export const Game = () => {
   const { replace } = useHistory();
   const { state, controls } = useControls();
 
-  // useEffect(() => {
-  //   if (state.inProgress === false) {
-  //     replace("game-over", { score: state.score });
-  //   }
-  // });
+  useEffect(() => {
+    if (state.inProgress === false) {
+      replace("game-over", { score: state.score });
+    }
+  });
 
   const memoizedStateValue = useMemo(() => state, [state]);
 

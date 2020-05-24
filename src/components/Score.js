@@ -1,5 +1,5 @@
 import React from "react";
-import { useGameContext } from "../pages/game";
+import { useGameContext } from "../hooks/useGameContext";
 
 export const Score = () => {
   const { score } = useGameContext();
