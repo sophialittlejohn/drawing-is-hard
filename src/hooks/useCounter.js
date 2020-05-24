@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { TIME_PER_ROUND } from "../pages/game";
 
 export const useCounter = () => {

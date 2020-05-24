@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Container, Header, Card, Button, Grid, Icon } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
 import { useControls } from "../hooks/useControls";
-import { Score } from "../components/Score";
 import { Rounds } from "../components/Rounds";
 import { Task } from "../components/Task";
 import { Canvas } from "../components/Canvas";
-import { useMemo } from "react";
 import { GameStateContext } from "../hooks/useGameContext";
 
 export const TOTAL_ROUNDS = 10;

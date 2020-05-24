@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Typewriter from "typewriter-effect";
 
-import { useState } from "react";
 import { usePrevious } from "../hooks/usePrevious";
 import { useGameContext } from "../hooks/useGameContext";
 import { TIME_PER_ROUND, TOTAL_ROUNDS } from "../pages/game";
@@ -22,10 +21,6 @@ export const Task = ({ startCounter }) => {
   };
 
   useEffect(() => {
-    unmountTypewriter();
-  }, []);
-
-  useEffect(() => {
     if (counter === 0) {
       unmountTypewriter();
     }
@@ -34,7 +29,7 @@ export const Task = ({ startCounter }) => {
     }
     if (inProgress && task && previousTask !== task && round < TOTAL_ROUNDS) {
       // re-mount typed
-      window.setTimeout(() => setPartOne(true), 1000);
+      window.setTimeout(() => setPartOne(true), 500);
     }
   }, [counter, inProgress, previousTask, task, score, previousScore, round]);
 
@@ -83,7 +78,7 @@ export const Task = ({ startCounter }) => {
                 typewriter
                   .typeString("in in the box to the right.")
                   .callFunction(() => {
-                    setPartThree(true);
+                    // setPartThree(true);
                     startCounter();
                   })
                   .start();

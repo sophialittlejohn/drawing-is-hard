@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useHistory } from "react-router-dom";
 import { Container, Grid, Header, Card, Button } from "semantic-ui-react";
 
@@ -11,7 +10,7 @@ export const Home = () => {
       <Grid>
         <Grid.Row>
           <Grid.Column>
-            <Card fluid color="olive">
+            <Card fluid color="blue">
               <Card.Content>
                 <Header as="h1">Drawing Is Hard</Header>
               </Card.Content>
@@ -47,13 +46,7 @@ export const Home = () => {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            <Button
-              onClick={() => push("/game")}
-              size="massive"
-              primary
-              fluid
-              color="olive"
-            >
+            <Button onClick={() => push("/game")} size="massive" primary fluid>
               Play
             </Button>
           </Grid.Column>

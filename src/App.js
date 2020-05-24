@@ -1,6 +1,6 @@
 import React from "react";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 
 import { Home } from "./pages/home";
 import { Game } from "./pages/game";
