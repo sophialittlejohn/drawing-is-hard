@@ -4,6 +4,7 @@ import Typewriter from "typewriter-effect";
 import { useState } from "react";
 import { usePrevious } from "../hooks/usePrevious";
 import { useGameContext } from "../hooks/useGameContext";
+import { TIME_PER_ROUND } from "../pages/game";
 
 export const Task = ({ startCounter }) => {
   const [partOne, setPartOne] = useState(false);
@@ -57,7 +58,7 @@ export const Task = ({ startCounter }) => {
         )}
         {partTwo && (
           <>
-            {counter || 20}
+            {counter || TIME_PER_ROUND}
             <Typewriter
               key={partTwo}
               options={{ delay: 10 }}

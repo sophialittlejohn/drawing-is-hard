@@ -10,7 +10,8 @@ import { Canvas } from "../components/Canvas";
 import { useMemo } from "react";
 import { GameStateContext } from "../hooks/useGameContext";
 
-export const TOTAL_ROUNDS = 2;
+export const TOTAL_ROUNDS = 10;
+export const TIME_PER_ROUND = 20;
 
 export const Game = () => {
   const { replace } = useHistory();
