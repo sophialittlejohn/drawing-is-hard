@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/sophialittlejohn/static/css/main.2146d9c7.chunk.css",
-    "main.js": "/sophialittlejohn/static/js/main.a7ff6279.chunk.js",
-    "main.js.map": "/sophialittlejohn/static/js/main.a7ff6279.chunk.js.map",
-    "runtime-main.js": "/sophialittlejohn/static/js/runtime-main.9171021d.js",
-    "runtime-main.js.map": "/sophialittlejohn/static/js/runtime-main.9171021d.js.map",
-    "static/css/2.ca202d4d.chunk.css": "/sophialittlejohn/static/css/2.ca202d4d.chunk.css",
-    "static/js/2.180c2d0c.chunk.js": "/sophialittlejohn/static/js/2.180c2d0c.chunk.js",
-    "static/js/2.180c2d0c.chunk.js.map": "/sophialittlejohn/static/js/2.180c2d0c.chunk.js.map",
-    "index.html": "/sophialittlejohn/index.html",
-    "precache-manifest.94e1ca47465da52745a4d3d366b7a030.js": "/sophialittlejohn/precache-manifest.94e1ca47465da52745a4d3d366b7a030.js",
-    "service-worker.js": "/sophialittlejohn/service-worker.js",
-    "static/css/2.ca202d4d.chunk.css.map": "/sophialittlejohn/static/css/2.ca202d4d.chunk.css.map",
-    "static/css/main.2146d9c7.chunk.css.map": "/sophialittlejohn/static/css/main.2146d9c7.chunk.css.map",
-    "static/js/2.180c2d0c.chunk.js.LICENSE.txt": "/sophialittlejohn/static/js/2.180c2d0c.chunk.js.LICENSE.txt",
-    "static/media/semantic.min.css": "/sophialittlejohn/static/media/outline-icons.ef60a4f6.woff"
+    "main.css": "/drawing-is-hard/static/css/main.2146d9c7.chunk.css",
+    "main.js": "/drawing-is-hard/static/js/main.56369c86.chunk.js",
+    "main.js.map": "/drawing-is-hard/static/js/main.56369c86.chunk.js.map",
+    "runtime-main.js": "/drawing-is-hard/static/js/runtime-main.8161411e.js",
+    "runtime-main.js.map": "/drawing-is-hard/static/js/runtime-main.8161411e.js.map",
+    "static/css/2.d7f84a37.chunk.css": "/drawing-is-hard/static/css/2.d7f84a37.chunk.css",
+    "static/js/2.180c2d0c.chunk.js": "/drawing-is-hard/static/js/2.180c2d0c.chunk.js",
+    "static/js/2.180c2d0c.chunk.js.map": "/drawing-is-hard/static/js/2.180c2d0c.chunk.js.map",
+    "index.html": "/drawing-is-hard/index.html",
+    "precache-manifest.8e491b7978c5ea79374d3c8dde11a86a.js": "/drawing-is-hard/precache-manifest.8e491b7978c5ea79374d3c8dde11a86a.js",
+    "service-worker.js": "/drawing-is-hard/service-worker.js",
+    "static/css/2.d7f84a37.chunk.css.map": "/drawing-is-hard/static/css/2.d7f84a37.chunk.css.map",
+    "static/css/main.2146d9c7.chunk.css.map": "/drawing-is-hard/static/css/main.2146d9c7.chunk.css.map",
+    "static/js/2.180c2d0c.chunk.js.LICENSE.txt": "/drawing-is-hard/static/js/2.180c2d0c.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/drawing-is-hard/static/media/outline-icons.ef60a4f6.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.9171021d.js",
-    "static/css/2.ca202d4d.chunk.css",
+    "static/js/runtime-main.8161411e.js",
+    "static/css/2.d7f84a37.chunk.css",
     "static/js/2.180c2d0c.chunk.js",
     "static/css/main.2146d9c7.chunk.css",
-    "static/js/main.a7ff6279.chunk.js"
+    "static/js/main.56369c86.chunk.js"
   ]
 }
