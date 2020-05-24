@@ -2,6 +2,7 @@
   "name": "drawing-is-hard",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://sophialittlejohn.github.io/drawing-is-hard",
   "dependencies": {
     "@tensorflow/tfjs": "^1.7.4",
     "@testing-library/jest-dom": "^4.2.4",
@@ -13,13 +14,16 @@
     "react-scripts": "3.4.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
-    "typewriter-effect": "^2.13.1"
+    "typewriter-effect": "^2.13.1",
+    "gh-pages": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
