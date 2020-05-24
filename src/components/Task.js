@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Typewriter from "typewriter-effect";
+import "../styles/typewriter.css";
 
 import { usePrevious } from "../hooks/usePrevious";
 import { useGameContext } from "../hooks/useGameContext";
@@ -27,20 +28,30 @@ export const Task = ({ startCounter }) => {
     if (previousScore !== score) {
       unmountTypewriter();
     }
-    if (inProgress && task && previousTask !== task && round < TOTAL_ROUNDS) {
+    if (
+      inProgress &&
+      task &&
+      previousTask !== task &&
+      round < TOTAL_ROUNDS + 1
+    ) {
       // re-mount typed
       window.setTimeout(() => setPartOne(true), 500);
     }
   }, [counter, inProgress, previousTask, task, score, previousScore, round]);
 
+  const typewriterOptions = {
+    delay: 50,
+    cursor: " ",
+    wrapperClassName: "wrapper",
+  };
+
   return (
     <>
-      <span>
+      <div className="wrapper">
         {partOne && (
           <Typewriter
-            // target child div to for inline layout
             key={partOne}
-            options={{ delay: 10 }}
+            options={typewriterOptions}
             onInit={(typewriter) => {
               typewriter
                 .typeString("Hello, you have ")
@@ -53,10 +64,10 @@ export const Task = ({ startCounter }) => {
         )}
         {partTwo && (
           <>
-            {counter || TIME_PER_ROUND}
+            <span className="whitespace">{counter || TIME_PER_ROUND}</span>
             <Typewriter
               key={partTwo}
-              options={{ delay: 10 }}
+              options={typewriterOptions}
               onInit={(typewriter) => {
                 typewriter
                   .typeString("seconds to draw a ")
@@ -70,13 +81,13 @@ export const Task = ({ startCounter }) => {
         )}
         {partThree && (
           <>
-            {task}
+            <span className="whitespace">{task}</span>
             <Typewriter
               key={partThree}
-              options={{ delay: 10 }}
+              options={typewriterOptions}
               onInit={(typewriter) => {
                 typewriter
-                  .typeString("in in the box to the right.")
+                  .typeString("in the box to the left.")
                   .callFunction(() => {
                     // setPartThree(true);
                     startCounter();
@@ -86,7 +97,7 @@ export const Task = ({ startCounter }) => {
             />
           </>
         )}
-      </span>
+      </div>
     </>
   );
 };

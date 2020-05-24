@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 
-export const Canvas = React.memo((props) => {
+export const CANVAS_ID = "myCanvas";
+
+export const Canvas = React.memo(() => {
   const canvasRef = useRef(null);
 
   useEffect(() => {});
@@ -56,7 +58,7 @@ export const Canvas = React.memo((props) => {
       onMouseDown={() => (mouseDown = true)}
       onMouseUp={handleMouseup}
       onMouseMove={(e) => handleMousemove(e)}
-      id="myCanvas"
+      id={CANVAS_ID}
       style={{
         border: "3px dotted gray",
         cursor: "pointer",

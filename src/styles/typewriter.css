@@ -1,0 +1,12 @@
+.wrapper {
+  display: inline-flex;
+  flex-flow: wrap;
+  line-height: 1.5;
+  font-size: 24px;
+}
+
+.whitespace {
+  padding-left: 3px;
+  padding-right: 3px;
+  font-weight: bold;
+}

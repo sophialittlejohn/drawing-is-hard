@@ -4,6 +4,7 @@ import { useCounter } from "./useCounter";
 import { gameReducer, initialGameState } from "../reducers/gameReducer";
 import { getPrediction } from "../helpers";
 import { TOTAL_ROUNDS } from "../pages/game";
+import { CANVAS_ID } from "../components/Canvas";
 
 export const useControls = (totalRounds = TOTAL_ROUNDS) => {
   const labelRef = useRef(null);
@@ -22,7 +23,7 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
 
     labelRef.current = label;
     modelRef.current = model;
-    canvasRef.current = document.getElementById("myCanvas");
+    canvasRef.current = document.getElementById(CANVAS_ID);
     startGame();
   };
 
@@ -45,7 +46,7 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
     } else if (counter === 0) {
       clearCanvas(canvasRef);
       stopCounter();
-      dispatch({ type: "NEW_ROUND", payload: labelRef.current[round + 1] });
+      dispatch({ type: "NEW_ROUND", payload: labelRef.current[round] });
     } else {
       return;
     }
@@ -60,10 +61,11 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
   const guess = async () => {
     if (modelRef && modelRef.current && canvasRef && canvasRef.current) {
       const prediction = await getPrediction(canvasRef, modelRef.current);
+
       if (prediction && labelRef.current[prediction[0]] === task) {
         clearCanvas(canvasRef);
         stopCounter();
-        dispatch({ type: "WIN_ROUND", payload: labelRef.current[round + 1] });
+        dispatch({ type: "WIN_ROUND", payload: labelRef.current[round] });
       }
     }
   };
@@ -79,7 +81,7 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
   });
 
   useEffect(() => {
-    if (inProgress) {
+    if (inProgress && counter && counter < 18) {
       guess();
     }
   });
