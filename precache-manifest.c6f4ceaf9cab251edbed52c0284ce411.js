@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "14b04bc6ef6dc491b42b806164bdab45",
+    "revision": "3cfa14748af9067ef7cc6f3bc9b1d367",
     "url": "/drawing-is-hard/index.html"
   },
   {
-    "revision": "abeb22deadf2e56d4f0c",
+    "revision": "a06228acc7dfbc8dd948",
     "url": "/drawing-is-hard/static/css/2.d7f84a37.chunk.css"
   },
   {
-    "revision": "ea4bcb1950c0657c5da7",
+    "revision": "8b0d8515c8b2d349f3ea",
     "url": "/drawing-is-hard/static/css/main.2146d9c7.chunk.css"
   },
   {
-    "revision": "abeb22deadf2e56d4f0c",
-    "url": "/drawing-is-hard/static/js/2.d74c3209.chunk.js"
+    "revision": "a06228acc7dfbc8dd948",
+    "url": "/drawing-is-hard/static/js/2.180c2d0c.chunk.js"
   },
   {
     "revision": "d37259702a04f94e1233303608e8afd0",
-    "url": "/drawing-is-hard/static/js/2.d74c3209.chunk.js.LICENSE.txt"
+    "url": "/drawing-is-hard/static/js/2.180c2d0c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ea4bcb1950c0657c5da7",
-    "url": "/drawing-is-hard/static/js/main.b0aa35cc.chunk.js"
+    "revision": "8b0d8515c8b2d349f3ea",
+    "url": "/drawing-is-hard/static/js/main.3c751b3c.chunk.js"
   },
   {
     "revision": "b9264bc62a5f8d7ebc7c",
