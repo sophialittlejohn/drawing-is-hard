@@ -18,7 +18,7 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
   );
 
   const fetchModels = async () => {
-    const model = await tf.loadLayersModel("../../model/model.json");
+    const model = await tf.loadLayersModel("./model/model.json");
     const label = require("./../labels.json");
 
     labelRef.current = label;
@@ -47,8 +47,6 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
       clearCanvas(canvasRef);
       stopCounter();
       dispatch({ type: "NEW_ROUND", payload: labelRef.current[round] });
-    } else {
-      return;
     }
   };
 

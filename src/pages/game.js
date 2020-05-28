@@ -32,7 +32,6 @@ export const Game = () => {
               <Card fluid color="olive">
                 <Card.Content>
                   <Header as="h2">
-                    {" "}
                     <Rounds />
                   </Header>
                 </Card.Content>
