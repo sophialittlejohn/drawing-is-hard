@@ -1,6 +1,6 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
-import { HashRouter, Route, BrowserRouter as Router } from "react-router-dom";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 
 import { Home } from "./pages/home";
 import { Game } from "./pages/game";
@@ -8,8 +8,8 @@ import { GameOver } from "./pages/game-over";
 
 export const App = () => {
   return (
-    <Router>
-      <HashRouter basename="/">
+    <Router basename={process.env.PUBLIC_URL}>
+      <Switch>
         <Route exact path="/">
           <Home />
         </Route>
@@ -19,7 +19,7 @@ export const App = () => {
         <Route path="/game-over">
           <GameOver />
         </Route>
-      </HashRouter>
+      </Switch>
     </Router>
   );
 };
