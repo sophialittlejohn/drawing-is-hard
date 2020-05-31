@@ -48,27 +48,6 @@ test("should use counter", () => {
   expect(result.current.counter).toBe(null);
 });
 
-// test("should start the game", () => {
-//   // const wrapper = ({ children }) => (
-//   //   <GameStateContext value={initialGameState}>{children}</GameStateContext>
-//   // );
-//   const { result } = renderHook(() => useControls(), {
-//     wrapper: ({ children }) => (
-//       <GameStateContext.Provider value={initialGameState}>
-//         {children}
-//       </GameStateContext.Provider>
-//     ),
-//   });
-
-//   expect(result.current.state.inProgress).toBe(null);
-
-//   const { result } = renderHook(() => useControls(), { wrapper });
-//   act(() => {
-//     result.current.controls.startGame();
-//   });
-//   expect(result.current.inProgress).toBe(true);
-// });
-
 test("should handle test gameReducer hook", () => {
   const { result } = renderHook(() =>
     useReducer(gameReducer, initialGameState)

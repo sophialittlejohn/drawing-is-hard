@@ -12,12 +12,12 @@ export const TOTAL_ROUNDS = 10;
 export const TIME_PER_ROUND = 20;
 
 export const Game = () => {
-  const { replace } = useHistory();
+  const { push } = useHistory();
   const { state, controls } = useControls();
 
   useEffect(() => {
     if (state.inProgress === false) {
-      replace("game-over", { score: state.score });
+      push("game-over", { score: state.score });
     }
   });
 
@@ -69,7 +69,7 @@ export const Game = () => {
             </Grid.Column>
             <Grid.Column width="two">
               <Button
-                onClick={() => replace("/")}
+                onClick={() => push("/")}
                 size="massive"
                 fluid
                 icon

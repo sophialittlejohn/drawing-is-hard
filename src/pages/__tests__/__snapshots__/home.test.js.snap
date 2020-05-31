@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="ui text container"
+    style="padding-top: 10%;"
+  >
+    <div
+      class="ui grid"
+    >
+      <div
+        class="row"
+      >
+        <div
+          class="column"
+        >
+          <div
+            class="ui blue fluid card"
+          >
+            <div
+              class="content"
+            >
+              <h1
+                class="ui header"
+              >
+                Drawing Is Hard
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="column"
+        >
+          <div
+            class="ui fluid raised card"
+          >
+            <div
+              class="content"
+              style="font-size: 20px;"
+            >
+              <p>
+                This game has been modeled off Google's 
+                <a
+                  href="https://quickdraw.withgoogle.com/"
+                >
+                  Quick, Draw!
+                </a>
+                 game and uses a sampling from the Quick, Draw! dataset.
+              </p>
+              <p>
+                It was developed in the context of my capstone project at 
+                <a
+                  href="https://www.extensionschool.ch/"
+                >
+                  EPFL Extension School
+                </a>
+                .
+              </p>
+              <p>
+                Check out the source code in my 
+                <a
+                  href="https://github.com/sophialittlejohn/drawing-is-hard"
+                >
+                  GitHub repo
+                </a>
+                .
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="column"
+        >
+          <button
+            class="ui massive fluid primary button"
+          >
+            Play
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

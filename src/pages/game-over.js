@@ -65,6 +65,7 @@ export const GameOver = () => {
               icon
               basic
               color="blue"
+              aria-label="home"
             >
               <Icon name="home" />
             </Button>
