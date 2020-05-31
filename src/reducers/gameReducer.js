@@ -3,6 +3,7 @@ export const initialGameState = {
   round: null,
   score: null,
   inProgress: null,
+  // counter: null,
 };
 
 export const gameReducer = (state, action) => {
@@ -19,9 +20,7 @@ export const gameReducer = (state, action) => {
         task: action.payload,
       };
     case "GAME_OVER":
-      return { ...state, inProgress: false, task: null };
-    case "WIN_GAME":
-      return { ...state, inProgress: false };
+      return initialGameState;
     default:
       throw new Error();
   }
