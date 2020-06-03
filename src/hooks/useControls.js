@@ -37,7 +37,11 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
   };
 
   const playGame = () => {
-    if (round === totalRounds + 1 || score === totalRounds) {
+    console.log(round === totalRounds + 1);
+    if (score === totalRounds) {
+      stopCounter();
+      dispatch({ type: "GAME_OVER" });
+    } else if (round === totalRounds + 1) {
       stopCounter();
       dispatch({ type: "GAME_OVER" });
     } else if (counter === 0) {
