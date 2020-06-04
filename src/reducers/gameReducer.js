@@ -20,7 +20,9 @@ export const gameReducer = (state, action) => {
         task: action.payload,
       };
     case "GAME_OVER":
-      return { ...initialGameState, inProgress: false };
+      return { ...state, inProgress: false, task: null };
+    case "WIN_GAME":
+      return { ...state, inProgress: false };
     default:
       throw new Error();
   }
