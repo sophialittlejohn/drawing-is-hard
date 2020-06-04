@@ -77,5 +77,9 @@ test("should handle test gameReducer hook", () => {
     dispatch({ type: "GAME_OVER" });
   });
 
-  expect(result.current[0]).toStrictEqual(initialState);
+  expect(result.current[0]).toStrictEqual({
+    ...roundThreeState,
+    inProgress: false,
+    task: null,
+  });
 });
