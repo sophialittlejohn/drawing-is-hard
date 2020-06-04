@@ -37,10 +37,9 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
   };
 
   const playGame = () => {
-    console.log(round === totalRounds + 1);
     if (score === totalRounds) {
       stopCounter();
-      dispatch({ type: "GAME_OVER" });
+      dispatch({ type: "WIN_GAME" });
     } else if (round === totalRounds + 1) {
       stopCounter();
       dispatch({ type: "GAME_OVER" });
@@ -50,7 +49,6 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
       dispatch({ type: "NEW_ROUND", payload: labelRef.current[round] });
     }
   };
-
   const clearCanvas = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
