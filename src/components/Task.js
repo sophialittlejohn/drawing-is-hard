@@ -52,47 +52,33 @@ export const Task = ({ startCounter }) => {
     typewriter.typeString(strings).callFunction(callback).start();
   };
 
-  return (
-    <>
-      <div className="wrapper">
-        {partOne && (
-          <Typewriter
-            key={partOne}
+  const renderTypewriter = (key, message, callback) => (
+      <>
+	{message}
+	<Typewriter
+            key={key}
             options={typewriterOptions}
             onInit={(typewriter) =>
-              initType(typewriter, partOne, () =>
-                setPartTwo("seconds to draw a")
-              )
-            }
-          />
-        )}
-        {partTwo && (
-          <>
-            <span className="whitespace">{counter || TIME_PER_ROUND}</span>
-            <Typewriter
-              key={partTwo}
-              options={typewriterOptions}
-              onInit={(typewriter) =>
-                initType(typewriter, partTwo, () =>
-                  setPartThree("in the box to the left.")
-                )
-              }
-            />
-          </>
-        )}
-        {partThree && (
-          <>
-            <span className="whitespace">{task}</span>
-            <Typewriter
-              key={partThree}
-              options={typewriterOptions}
-              onInit={(typewriter) =>
-                initType(typewriter, partThree, () => startCounter())
-              }
-            />
-          </>
-        )}
+              initType(typewriter, key, callback)
+            } />
+      </>
+  )
+
+  const one = partOne && renderTypewriter(partOne,
+	  				  null,
+	  				  () => setPartTwo("seconds to draw a"));
+  const two = partTwo && renderTypewriter(partTwo, 
+	  	               		  <span className="whitespace">{counter || TIME_PER_ROUND}</span>,
+	  	   	       		  () => setPartThree("in the box to the left."));
+  const three = partThree && renderTypewriter(partThree,
+             			 	      <span className="whitespace">{task}</span>,
+		   		 	      () => startCounter());
+
+  return (
+      <div className="wrapper">
+        {one}
+        {two}
+        {three}
       </div>
-    </>
   );
 };
