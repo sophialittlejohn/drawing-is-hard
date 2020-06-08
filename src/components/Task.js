@@ -27,10 +27,15 @@ export const Task = ({ startCounter }) => {
     setPartThree(null);
   };
 
-  useEffect(() => {
+  function counterDidUpdate() {
     if (counter === 0) {
       unmountTypewriter();
     }
+  };
+
+  useEffect(counterDidUpdate, [counter]);
+
+  useEffect(() => {
     if (score && previousScore !== score) {
       unmountTypewriter();
       window.setTimeout(() => setPartOne("Nice sketch! You have"));
@@ -46,7 +51,7 @@ export const Task = ({ startCounter }) => {
       }
       window.setTimeout(() => setPartOne(initialString));
     }
-  }, [counter, inProgress, previousTask, task, score, previousScore, round]);
+  }, [inProgress, previousTask, task, score, previousScore, round]);
 
   const initType = (typewriter, strings, callback) => {
     typewriter.typeString(strings).callFunction(callback).start();
