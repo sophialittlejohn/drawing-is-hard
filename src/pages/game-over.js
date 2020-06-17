@@ -49,7 +49,7 @@ export const GameOver = () => {
         <Grid.Row>
           <Grid.Column width="14">
             <Button
-              onClick={() => replace("/game")}
+              onClick={() => replace("/play")}
               size="massive"
               color="blue"
               fluid

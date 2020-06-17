@@ -46,7 +46,7 @@ export const Home = () => {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            <Button onClick={() => push("/game")} size="massive" primary fluid>
+            <Button onClick={() => push("/play")} size="massive" primary fluid>
               Play
             </Button>
           </Grid.Column>

@@ -3,7 +3,7 @@ import { useEffect, useReducer, useRef } from "react";
 import { useCounter } from "./useCounter";
 import { gameReducer, initialGameState } from "../reducers/gameReducer";
 import { getPrediction } from "../helpers";
-import { TOTAL_ROUNDS } from "../pages/game";
+import { TOTAL_ROUNDS } from "../pages/play";
 import { CANVAS_ID } from "../components/Canvas";
 
 export const useControls = (totalRounds = TOTAL_ROUNDS) => {

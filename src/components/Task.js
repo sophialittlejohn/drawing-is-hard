@@ -4,7 +4,7 @@ import "../styles/typewriter.css";
 
 import { usePrevious } from "../hooks/usePrevious";
 import { useGameContext } from "../hooks/useGameContext";
-import { TIME_PER_ROUND, TOTAL_ROUNDS } from "../pages/game";
+import { TIME_PER_ROUND, TOTAL_ROUNDS } from "../pages/play";
 
 const typewriterOptions = {
   delay: 50,
@@ -31,7 +31,7 @@ export const Task = ({ startCounter }) => {
     if (counter === 0) {
       unmountTypewriter();
     }
-  };
+  }
 
   useEffect(counterDidUpdate, [counter]);
 
@@ -58,32 +58,39 @@ export const Task = ({ startCounter }) => {
   };
 
   const renderTypewriter = (key, message, callback) => (
-      <>
-	{message}
-	<Typewriter
-            key={key}
-            options={typewriterOptions}
-            onInit={(typewriter) =>
-              initType(typewriter, key, callback)
-            } />
-      </>
-  )
+    <>
+      {message}
+      <Typewriter
+        key={key}
+        options={typewriterOptions}
+        onInit={(typewriter) => initType(typewriter, key, callback)}
+      />
+    </>
+  );
 
-  const one = partOne && renderTypewriter(partOne,
-	  				  null,
-	  				  () => setPartTwo("seconds to draw a"));
-  const two = partTwo && renderTypewriter(partTwo, 
-	  	               		  <span className="whitespace">{counter || TIME_PER_ROUND}</span>,
-	  	   	       		  () => setPartThree("in the box to the left."));
-  const three = partThree && renderTypewriter(partThree,
-             			 	      <span className="whitespace">{task}</span>,
-		   		 	      () => startCounter());
+  const one =
+    partOne &&
+    renderTypewriter(partOne, null, () => setPartTwo("seconds to draw a"));
+  const two =
+    partTwo &&
+    renderTypewriter(
+      partTwo,
+      <span className="whitespace">{counter || TIME_PER_ROUND}</span>,
+      () => setPartThree("in the box to the left.")
+    );
+  const three =
+    partThree &&
+    renderTypewriter(
+      partThree,
+      <span className="whitespace">{task}</span>,
+      () => startCounter()
+    );
 
   return (
-      <div className="wrapper">
-        {one}
-        {two}
-        {three}
-      </div>
+    <div className="wrapper">
+      {one}
+      {two}
+      {three}
+    </div>
   );
 };

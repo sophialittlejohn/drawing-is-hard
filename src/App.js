@@ -3,7 +3,7 @@ import "semantic-ui-css/semantic.min.css";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 
 import { Home } from "./pages/home";
-import { Game } from "./pages/game";
+import { Play } from "./pages/play";
 import { GameOver } from "./pages/game-over";
 
 export const App = () => {
@@ -13,8 +13,8 @@ export const App = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/game">
-          <Game />
+        <Route path="/play">
+          <Play />
         </Route>
         <Route path="/game-over">
           <GameOver />
