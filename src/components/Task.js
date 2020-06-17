@@ -27,10 +27,15 @@ export const Task = ({ startCounter }) => {
     setPartThree(null);
   };
 
-  useEffect(() => {
+  function counterDidUpdate() {
     if (counter === 0) {
       unmountTypewriter();
     }
+  };
+
+  useEffect(counterDidUpdate, [counter]);
+
+  useEffect(() => {
     if (score && previousScore !== score) {
       unmountTypewriter();
       window.setTimeout(() => setPartOne("Nice sketch! You have"));
@@ -46,53 +51,39 @@ export const Task = ({ startCounter }) => {
       }
       window.setTimeout(() => setPartOne(initialString));
     }
-  }, [counter, inProgress, previousTask, task, score, previousScore, round]);
+  }, [inProgress, previousTask, task, score, previousScore, round]);
 
   const initType = (typewriter, strings, callback) => {
     typewriter.typeString(strings).callFunction(callback).start();
   };
 
-  return (
-    <>
-      <div className="wrapper">
-        {partOne && (
-          <Typewriter
-            key={partOne}
+  const renderTypewriter = (key, message, callback) => (
+      <>
+	{message}
+	<Typewriter
+            key={key}
             options={typewriterOptions}
             onInit={(typewriter) =>
-              initType(typewriter, partOne, () =>
-                setPartTwo("seconds to draw a")
-              )
-            }
-          />
-        )}
-        {partTwo && (
-          <>
-            <span className="whitespace">{counter || TIME_PER_ROUND}</span>
-            <Typewriter
-              key={partTwo}
-              options={typewriterOptions}
-              onInit={(typewriter) =>
-                initType(typewriter, partTwo, () =>
-                  setPartThree("in the box to the left.")
-                )
-              }
-            />
-          </>
-        )}
-        {partThree && (
-          <>
-            <span className="whitespace">{task}</span>
-            <Typewriter
-              key={partThree}
-              options={typewriterOptions}
-              onInit={(typewriter) =>
-                initType(typewriter, partThree, () => startCounter())
-              }
-            />
-          </>
-        )}
+              initType(typewriter, key, callback)
+            } />
+      </>
+  )
+
+  const one = partOne && renderTypewriter(partOne,
+	  				  null,
+	  				  () => setPartTwo("seconds to draw a"));
+  const two = partTwo && renderTypewriter(partTwo, 
+	  	               		  <span className="whitespace">{counter || TIME_PER_ROUND}</span>,
+	  	   	       		  () => setPartThree("in the box to the left."));
+  const three = partThree && renderTypewriter(partThree,
+             			 	      <span className="whitespace">{task}</span>,
+		   		 	      () => startCounter());
+
+  return (
+      <div className="wrapper">
+        {one}
+        {two}
+        {three}
       </div>
-    </>
   );
 };
