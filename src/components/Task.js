@@ -7,7 +7,7 @@ import { useGameContext } from "../hooks/useGameContext";
 import { TIME_PER_ROUND, TOTAL_ROUNDS } from "../pages/play";
 
 const typewriterOptions = {
-  delay: 50,
+  delay: 30,
   cursor: " ",
   wrapperClassName: "wrapper",
 };
