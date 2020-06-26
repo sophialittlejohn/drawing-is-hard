@@ -1,15 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export const CANVAS_ID = "myCanvas";
 
 export const Canvas = React.memo(() => {
   const canvasRef = useRef(null);
+  const [mouseDown, setMouseDown] = useState(false);
+  const [last, setLast] = useState({
+    x: undefined,
+    y: undefined,
+  });
 
   useEffect(() => {});
-
-  let mouseDown = false;
-  let lastX;
-  let lastY;
 
   function drawLine(canvas, x, y, lastX, lastY) {
     let context = canvas.getContext("2d");
@@ -28,8 +29,8 @@ export const Canvas = React.memo(() => {
   }
 
   const handleMouseup = () => {
-    mouseDown = false;
-    [lastX, lastY] = [undefined, undefined];
+    setMouseDown(false);
+    setLast({ x: undefined, y: undefined });
   };
 
   const handleMousemove = (e) => {
@@ -38,7 +39,8 @@ export const Canvas = React.memo(() => {
     const y = e.clientY - rect.top;
 
     if (mouseDown) {
-      [lastX, lastY] = drawLine(e.target, x, y, lastX, lastY);
+      const [lastX, lastY] = drawLine(e.target, x, y, last.x, last.y);
+      setLast({ x: lastX, y: lastY });
     }
   };
 
@@ -48,14 +50,14 @@ export const Canvas = React.memo(() => {
 
     context.fillStyle = "#ffffff";
     context.fillRect(0, 0, canvas.height, canvas.width);
-  });
+  }, []);
 
   return (
     <canvas
       height={300}
       width={300}
       ref={canvasRef}
-      onMouseDown={() => (mouseDown = true)}
+      onMouseDown={() => setMouseDown(true)}
       onMouseUp={handleMouseup}
       onMouseMove={(e) => handleMousemove(e)}
       id={CANVAS_ID}
