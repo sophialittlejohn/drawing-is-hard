@@ -3,7 +3,6 @@ export const initialGameState = {
   round: null,
   score: null,
   inProgress: null,
-  // counter: null,
 };
 
 export const gameReducer = (state, action) => {

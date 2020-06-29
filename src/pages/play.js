@@ -45,7 +45,7 @@ export const Play = () => {
                   <Grid columns="equal">
                     <Grid.Row>
                       <Grid.Column>
-                        <Canvas />
+                        <Canvas guess={controls.guess} />
                       </Grid.Column>
                       <Grid.Column>
                         <Task startCounter={controls.startCounter} />

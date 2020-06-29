@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useGameContext } from "../hooks/useGameContext";
 
 export const CANVAS_ID = "myCanvas";
 
-export const Canvas = React.memo(() => {
+export const Canvas = React.memo(({ guess }) => {
+  const { counter, inProgress } = useGameContext();
   const canvasRef = useRef(null);
   const [mouseDown, setMouseDown] = useState(false);
   const [last, setLast] = useState({
@@ -10,7 +12,11 @@ export const Canvas = React.memo(() => {
     y: undefined,
   });
 
-  useEffect(() => {});
+  useEffect(() => {
+    if (mouseDown && inProgress && counter && counter < 20) {
+      guess();
+    }
+  }, [mouseDown, inProgress, counter, guess]);
 
   function drawLine(canvas, x, y, lastX, lastY) {
     let context = canvas.getContext("2d");

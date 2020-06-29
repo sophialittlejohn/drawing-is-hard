@@ -19,16 +19,19 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
     initialGameState
   );
 
-  const fetchModels = async () => {
-    const model = await tf.loadLayersModel("./model/model.json");
-    const label = require("./../labels.json");
+  useEffect(() => {
+    const fetchModels = async () => {
+      const model = await tf.loadLayersModel("./model/model.json");
+      const label = require("./../labels.json");
 
-    labelRef.current = [...label];
-    taskRef.current = [...shuffle(label)];
-    modelRef.current = model;
-    canvasRef.current = document.getElementById(CANVAS_ID);
-    startGame();
-  };
+      labelRef.current = [...label];
+      taskRef.current = shuffle([...label]);
+      modelRef.current = model;
+      canvasRef.current = document.getElementById(CANVAS_ID);
+      startGame();
+    };
+    fetchModels();
+  }, []);
 
   const startGame = () => {
     dispatch({ type: "START_GAME", payload: taskRef.current[0] });
@@ -70,18 +73,8 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
   };
 
   useEffect(() => {
-    fetchModels();
-  }, []);
-
-  useEffect(() => {
     if (inProgress) {
       playGame();
-    }
-  });
-
-  useEffect(() => {
-    if (inProgress && counter && counter < 20) {
-      guess();
     }
   });
 
