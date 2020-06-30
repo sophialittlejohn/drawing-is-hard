@@ -22,10 +22,11 @@ export const Home = () => {
           <Grid.Column>
             <Card fluid raised>
               <Card.Content style={{ fontSize: "20px" }}>
+                <p>Can a neural network learn to recognize doodling?</p>
                 <p>
-                  This game has been modeled off Google's{" "}
+                  This game is based on Google's{" "}
                   <a href="https://quickdraw.withgoogle.com/">Quick, Draw!</a>{" "}
-                  game and uses a sampling from the Quick, Draw! dataset.
+                  game and uses a sampling it's trained neural network dataset.
                 </p>
                 <p>
                   It was developed in the context of my capstone project at{" "}
@@ -35,9 +36,9 @@ export const Home = () => {
                   .
                 </p>
                 <p>
-                  Check out the source code in my{" "}
+                  Check out the source code on{" "}
                   <a href="https://github.com/sophialittlejohn/drawing-is-hard">
-                    GitHub repo
+                    GitHub
                   </a>
                   .
                 </p>
@@ -61,7 +62,6 @@ export const Home = () => {
               icon
               size="massive"
               fluid
-              icon
               basic
               onClick={() => push("/settings")}
             >

@@ -58,7 +58,15 @@ export const Task = ({ startCounter }) => {
       }
       window.setTimeout(() => setPartOne(initialString));
     }
-  }, [inProgress, previousTask, task, score, previousScore, round]);
+  }, [
+    inProgress,
+    previousTask,
+    task,
+    score,
+    previousScore,
+    round,
+    totalRounds,
+  ]);
 
   const initType = (typewriter, strings, callback) => {
     typewriter.typeString(strings).callFunction(callback).start();

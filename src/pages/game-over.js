@@ -37,7 +37,12 @@ export const GameOver = () => {
           <Grid.Column>
             <Card fluid raised>
               <Card.Content style={{ fontSize: "20px" }}>
-                <p>GAME OVER!</p>
+                <p>
+                  Thanks for playing{" "}
+                  <span role="img" aria-label="gold medal emoji">
+                    🥇
+                  </span>
+                </p>
                 <p>
                   You scored <strong>{score}</strong> points.
                 </p>
