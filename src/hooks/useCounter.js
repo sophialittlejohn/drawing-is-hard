@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { TIME_PER_ROUND } from "../pages/play";
-
-export const useCounter = () => {
+export const useCounter = (timePerRound) => {
   const [counter, setCounter] = useState(null);
 
-  const startCounter = (value) => {
-    setCounter(value || TIME_PER_ROUND);
+  const startCounter = () => {
+    setCounter(timePerRound);
   };
 
   const stopCounter = () => {

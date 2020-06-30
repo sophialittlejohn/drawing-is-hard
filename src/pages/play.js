@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { Container, Header, Card, Button, Grid, Icon } from "semantic-ui-react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import { useControls } from "../hooks/useControls";
 import { Rounds } from "../components/Rounds";
@@ -13,7 +13,11 @@ export const TIME_PER_ROUND = 20;
 
 export const Play = () => {
   const { push } = useHistory();
-  const { state, controls } = useControls();
+  const location = useLocation();
+  const totalRounds = location.state?.rounds || TOTAL_ROUNDS;
+  const secondsPerRound = location.state?.seconds || TIME_PER_ROUND;
+
+  const { state, controls } = useControls(totalRounds, secondsPerRound);
 
   useEffect(() => {
     if (state.inProgress === false) {

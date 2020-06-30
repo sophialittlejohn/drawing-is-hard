@@ -1,9 +1,10 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { Container, Grid, Header, Card, Button } from "semantic-ui-react";
+import { useHistory, useLocation } from "react-router-dom";
+import { Container, Grid, Header, Card, Button, Icon } from "semantic-ui-react";
 
 export const Home = () => {
   const { push } = useHistory();
+  const { state } = useLocation();
 
   return (
     <Container style={{ paddingTop: "10%" }} text>
@@ -45,9 +46,26 @@ export const Home = () => {
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column>
-            <Button onClick={() => push("/play")} size="massive" primary fluid>
+          <Grid.Column width="14">
+            <Button
+              onClick={() => push("/play", state)}
+              size="massive"
+              primary
+              fluid
+            >
               Play
+            </Button>
+          </Grid.Column>
+          <Grid.Column width="2">
+            <Button
+              icon
+              size="massive"
+              fluid
+              icon
+              basic
+              onClick={() => push("/settings")}
+            >
+              <Icon name="settings" />
             </Button>
           </Grid.Column>
         </Grid.Row>

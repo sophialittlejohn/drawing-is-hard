@@ -4,7 +4,6 @@ import "../styles/typewriter.css";
 
 import { usePrevious } from "../hooks/usePrevious";
 import { useGameContext } from "../hooks/useGameContext";
-import { TIME_PER_ROUND, TOTAL_ROUNDS } from "../pages/play";
 
 const typewriterOptions = {
   delay: 30,
@@ -17,7 +16,15 @@ export const Task = ({ startCounter }) => {
   const [partTwo, setPartTwo] = useState(null);
   const [partThree, setPartThree] = useState(null);
 
-  const { counter, task, score, inProgress, round } = useGameContext();
+  const {
+    counter,
+    task,
+    score,
+    inProgress,
+    round,
+    totalRounds,
+    timePerRound,
+  } = useGameContext();
   const previousTask = usePrevious(task);
   const previousScore = usePrevious(score);
 
@@ -43,7 +50,7 @@ export const Task = ({ startCounter }) => {
       inProgress &&
       task &&
       previousTask !== task &&
-      round < TOTAL_ROUNDS + 1
+      round < totalRounds + 1
     ) {
       let initialString = "Close... you have ";
       if (round === 1) {
@@ -75,7 +82,7 @@ export const Task = ({ startCounter }) => {
     partTwo &&
     renderTypewriter(
       partTwo,
-      <span className="whitespace">{counter || TIME_PER_ROUND}</span>,
+      <span className="whitespace">{counter || timePerRound}</span>,
       () => setPartThree("in the box to the left.")
     );
   const three =

@@ -3,17 +3,16 @@ import { useEffect, useReducer, useRef } from "react";
 import { useCounter } from "./useCounter";
 import { gameReducer, initialGameState } from "../reducers/gameReducer";
 import { getPrediction } from "../helpers";
-import { TOTAL_ROUNDS } from "../pages/play";
 import { CANVAS_ID } from "../components/Canvas";
 import { shuffle } from "../lib/shuffle";
 
-export const useControls = (totalRounds = TOTAL_ROUNDS) => {
+export const useControls = (totalRounds, timePerRound) => {
   const labelRef = useRef(null);
   const taskRef = useRef(null);
   const modelRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const { startCounter, counter, stopCounter } = useCounter();
+  const { startCounter, counter, stopCounter } = useCounter(timePerRound);
   const [{ round, task, inProgress, score }, dispatch] = useReducer(
     gameReducer,
     initialGameState
@@ -92,6 +91,8 @@ export const useControls = (totalRounds = TOTAL_ROUNDS) => {
       counter,
       round,
       score,
+      totalRounds,
+      timePerRound,
     },
   };
 };

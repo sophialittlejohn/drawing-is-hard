@@ -5,6 +5,7 @@ import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import { Home } from "./pages/home";
 import { Play } from "./pages/play";
 import { GameOver } from "./pages/game-over";
+import { Settings } from "./pages/settings";
 
 export const App = () => {
   return (
@@ -12,6 +13,9 @@ export const App = () => {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/settings">
+          <Settings />
         </Route>
         <Route path="/play">
           <Play />
