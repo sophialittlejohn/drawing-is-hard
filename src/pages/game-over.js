@@ -28,7 +28,7 @@ export const GameOver = () => {
           <Grid.Column>
             <Card fluid color="blue">
               <Card.Content>
-                <Header as="h1">Drawing is hard - Final score {score}</Header>
+                <Header as="h1">Final score: {score}</Header>
               </Card.Content>
             </Card>
           </Grid.Column>
