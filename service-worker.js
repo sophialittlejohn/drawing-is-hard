@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/drawing-is-hard/precache-manifest.70bdfb30a7ff321f4cd9212fa696455d.js"
+  "/drawing-is-hard/precache-manifest.e9caf04ee44e3f6e42c3f1f8618c1e93.js"
 );
 
 self.addEventListener('message', (event) => {
